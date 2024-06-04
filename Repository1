@@ -1,0 +1,41 @@
+ip address add 192.168.1.2/29 dev ens224
+ip link set ens224 up
+
+cat /proc/interrupts | grep ens224
+service irqbalance stop
+echo 10 > /proc/irq/74/smp_affinity
+echo 10 > /proc/irq/75/smp_affinity
+echo 10 > /proc/irq/76/smp_affinity
+echo 10 > /proc/irq/77/smp_affinity
+echo 10 > /proc/irq/78/smp_affinity
+echo 10 > /proc/irq/79/smp_affinity
+echo 10 > /proc/irq/80/smp_affinity
+echo 10 > /proc/irq/81/smp_affinity
+
+//To check :
+cat /proc/irq/74/smp_affinity
+cat /proc/irq/75/smp_affinity
+cat /proc/irq/76/smp_affinity
+cat /proc/irq/77/smp_affinity
+cat /proc/irq/78/smp_affinity
+cat /proc/irq/79/smp_affinity
+cat /proc/irq/80/smp_affinity
+cat /proc/irq/81/smp_affinity
+cat /proc/irq/82/smp_affinity
+
+
+ethtool -G ens224 rx 2048
+ethtool -G ens224 tx 2048
+
+ip link set ens160 down
+
+cat /proc/interrupts | grep ens192
+//service irqbalance stop 
+echo 1 > /proc/irq/65/smp_affinity
+echo 1 > /proc/irq/66/smp_affinity
+echo 1 > /proc/irq/67/smp_affinity
+echo 1 > /proc/irq/68/smp_affinity
+echo 1 > /proc/irq/69/smp_affinity
+echo 1 > /proc/irq/70/smp_affinity
+echo 1 > /proc/irq/71/smp_affinity
+echo 1 > /proc/irq/72/smp_affinity
